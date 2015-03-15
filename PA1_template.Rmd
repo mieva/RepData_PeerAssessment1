@@ -1,9 +1,15 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output: 
+title: 'Reproducible Research: Peer Assessment 1'
+output:
   html_document:
-    keep_md: true
+    keep_md: yes
 ---
+
+```{r setup}
+  library(knitr)
+  opts_chunk$set(fig.path = "figures/", dev='png') # corrected path and added dev
+```
+
 The aim of this assignment is to analyse data from a personal activity monitoring device. So, first of all it is needed to download the data into an R object ready to be analysed. Here the code:
 
 ## Loading and preprocessing the data
@@ -23,7 +29,7 @@ To answer this question the overall number of steps taken per day has been calcu
 
 ```
 2. Then, to visualize the information a barplot is created:
-```{r}
+```{r barplot1}
         with(dailyStepSum, {
         par(oma=c(2,0,0,0), mar=c(6.75,6.75,3,0), mgp=c(5.75,0.75,0), las=2)
         barplot(
@@ -56,7 +62,7 @@ Then the data sample has been aggregate in a slightly different way than before,
 ```
 1. A time series plot is created with the new dataset:
 
-```{r}
+```{r timeseriesplot}
         plot(intervalSteps$Interval, intervalSteps$AvgStepsAvgAcrossDay,ylab ="averaged number of steps", xlab="5 minutes intervals", type="l", main = "Time series plot")
 
 ```
@@ -95,7 +101,7 @@ Then the data sample has been aggregate in a slightly different way than before,
 
 4. The new plot of the mean number of steps per day is the following:
 
-```{r}
+```{r barplot2}
         with(dailyStepSumNew, {
         par(oma=c(2,0,0,0), mar=c(6.75,6.75,3,0), mgp=c(5.75,0.75,0), las=2)
         barplot(height=Steps,main="Graph of Total Steps taken per Day",xlab      ="Dates",ylab="Steps per Day",names.arg=Date,space=c(0))})
@@ -134,7 +140,7 @@ The code:
         
 Finally the panel plot has been generated:
 
-```{r}
+```{r panelplot}
         library("lattice")
 
         xyplot(type="l",data=dayTypeIntervalSteps,Steps ~ Interval | DayType,xlab="Interval",ylab="Number of steps",layout=c(1,2))
